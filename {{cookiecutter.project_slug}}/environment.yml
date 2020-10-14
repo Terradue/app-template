@@ -1,0 +1,7 @@
+name: env_{{cookiecutter.project_slug}}
+channels:
+  - terradue
+  - conda-forge
+dependencies:
+  - python=3.7
+  - click
