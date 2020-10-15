@@ -5,8 +5,8 @@ MAINTAINER Terradue S.r.l
 USER root
 
 ## yum
-ADD install-yum.bash /tmp/install-yum.bash
-ADD yum.list /tmp/yum.list
+ADD .docker/install-yum.bash /tmp/install-yum.bash
+ADD .docker/yum.list /tmp/yum.list
 RUN set -x && chmod 755 /tmp/install-yum.bash && /tmp/install-yum.bash
 
 ENV NB_USER=jovyan \
@@ -17,20 +17,20 @@ ENV NB_USER=jovyan \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     CONDA_DIR=/opt/anaconda \
-    NB_PYTHON_PREFIX=/opt/anaconda/envs/env_{{cookiecutter.project_slug}}
+    NB_PYTHON_PREFIX=/opt/anaconda/envs/env_{{cookiecutter.project_slug}} 
     
 ENV USER=${NB_USER} \
     NB_UID=${NB_UID} \
     HOME=/home/${NB_USER} 
 
-ADD fix-permissions /usr/local/bin/fix-permissions
+ADD .docker/fix-permissions /usr/local/bin/fix-permissions
 
 RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
     chmod g+w /etc/passwd /etc/group && \
     fix-permissions $HOME
 
 # conda installation via miniforge
-ADD install-miniforge.bash /tmp/install-miniforge.bash
+ADD .docker/install-miniforge.bash /tmp/install-miniforge.bash
 
 ADD environment.yml /tmp/environment.yml
 
@@ -45,9 +45,6 @@ RUN rm -f /tmp/install-*.bash && rm -f /tmp/environment.yml
 RUN chown -R $NB_USER:$NB_GID ${HOME} 
 
 USER ${NB_USER}
-
-# setup conda activate/deactivate
-#RUN ${CONDA_DIR}/bin/conda init bash && source ${HOME}/.bashrc && ${CONDA_DIR}/bin/conda activate env_default
 
 # workdir for binder
 COPY --chown=jovyan:100 . ${HOME}
