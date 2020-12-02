@@ -51,8 +51,8 @@ COPY --chown=jovyan:100 . ${HOME}
 
 RUN cd ${HOME} && ${NB_PYTHON_PREFIX}/bin/python setup.py install
 
-ENV PREFIX /opt/anaconda/envs/${NB_PYTHON_PREFIX}
+ENV PREFIX ${NB_PYTHON_PREFIX}
 
-ENV PATH /opt/anaconda/envs/${NB_PYTHON_PREFIX}/bin:$PATH
+ENV PATH ${NB_PYTHON_PREFIX}/bin:$PATH
 
 WORKDIR ${HOME}
