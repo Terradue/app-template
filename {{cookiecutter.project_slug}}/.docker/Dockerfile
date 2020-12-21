@@ -50,7 +50,7 @@ RUN chown -R $NB_USER:$NB_GID ${HOME}
 
 USER ${NB_USER}
 
-ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/env_burned_area 
+ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/env_{{cookiecutter.project_slug}} 
 
 ENV PATH=$NB_PYTHON_PREFIX/bin:$CONDA_DIR/bin:$PATH \
     KERNEL_PYTHON_PREFIX=${NB_PYTHON_PREFIX} \
