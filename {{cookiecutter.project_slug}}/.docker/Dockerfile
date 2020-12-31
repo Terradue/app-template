@@ -24,7 +24,7 @@ RUN apt-get -qq update                                                          
     apt-get -qq install --yes apt-utils 
 
 RUN apt-get -qq update                                                                                                              && \
-    apt-get -qq install --yes --no-install-recommends wget make g++ sudo vim less unzip tree file  locales > /dev/null              && \
+    apt-get -qq install --yes --no-install-recommends ttf-dejavu wget make g++ sudo vim less unzip tree file  locales > /dev/null              && \
     apt-get -qq purge                                                                                                               && \
     apt-get -qq clean                                                                                                               && \
     rm -rf /var/lib/apt/lists/*
