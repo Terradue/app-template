@@ -56,13 +56,14 @@ ENV PATH=$NB_PYTHON_PREFIX/bin:$CONDA_DIR/bin:$PATH \
     KERNEL_PYTHON_PREFIX=${NB_PYTHON_PREFIX} \
     PREFIX=${NB_PYTHON_PREFIX}
 
-# install project
-COPY --chown=jovyan:100 . ${HOME}
-
+# create the conda environment
 ADD environment.yml /tmp/environment.yml
 
 RUN mamba env create -p ${NB_PYTHON_PREFIX} -f /tmp/environment.yml                                                                 && \
     mamba clean --all -f -y
+
+# install project
+COPY --chown=jovyan:100 . ${HOME}
 
 RUN cd ${HOME}                                                                                                                      && \
     ${NB_PYTHON_PREFIX}/bin/python setup.py install
