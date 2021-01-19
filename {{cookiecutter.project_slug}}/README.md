@@ -56,9 +56,22 @@ or
 docker run --rm -it {{cookiecutter.docker_repo}}/{{cookiecutter.project_slug}}:0.1 {{cookiecutter.project_slug|replace('_', '-')}} --help
 ```
 
-## Creating the CWL
+## Dump the CWL
 
-Check the examples provided in the `cwl-examples` folder and adapt one to the application requirements
+Thanks to `click2cwl` module, dump the CWL and parameters with the additional arguments:
+
+```bash
+docker run --rm -it {{cookiecutter.docker_repo}}/{{cookiecutter.project_slug}}:0.1 {{cookiecutter.project_slug|replace('_', '-')}} --dump cwl --docker {{cookiecutter.docker_repo}}/{{cookiecutter.project_slug}}:0.1
+```
+
+Use the `click2cwl` additional flags below: 
+
+- `--dump` `cwl`|`params`|`clt`. Example `--dump cwl --dump params` will dump the CWL document and the CWL parameters template in YAML. `clt` will dump the CWl `CommandLineTool` class only (no Workflow)
+- `--requirement` with `requirement=value` where requirement here is one of `"coresMin"`, `"coresMax"`, `"ramMin"`, `"ramMax"`. Example: 
+ `--requirement ramMax=1 --requirement ramMin=2`
+- `--docker <docker image>` if set, the `DockerRequirement` hint is set to pull the `<docker image>`
+- `--env` sets environment variables in the CWL with `env_var=env_var_value`. Example `--env A=1 --env B=2` where A and B are the environment variables to set in the CWL `EnvVarRequirement` requirement
+
 
 ## Setting up the git repository
 
