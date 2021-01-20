@@ -53,8 +53,7 @@ ENV PATH=$NB_PYTHON_PREFIX/bin:$CONDA_DIR/bin:$PATH \
 ADD environment.yml /tmp/environment.yml
 
 RUN mamba env create -p ${NB_PYTHON_PREFIX} -f /tmp/environment.yml                                                                 && \
-    mamba clean --all -f -y                                                                                                         && \
-    rm -fr /tmp/environment.yml 
+    mamba clean --all -f -y                                                                                                         
 
 # install project
 COPY --chown=jovyan:100 . ${HOME}
