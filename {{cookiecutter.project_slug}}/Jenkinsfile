@@ -11,8 +11,8 @@ pipeline {
                     
                     def dockerTag = "${dockerRegistry}/${dockerPartialTag}"
                     
-                    echo "dockerTag = ${dockerTag}a"
-                    echo "dockerNewVersion = ${dockerNewVersion}a" 
+                    echo "dockerTag = ${dockerTag}"
+                    echo "dockerNewVersion = ${dockerNewVersion}" 
 
                     def app = docker.build("${dockerTag}", "-f .docker/Dockerfile .")
                     def mType=getTypeOfVersion(env.BRANCH_NAME)
