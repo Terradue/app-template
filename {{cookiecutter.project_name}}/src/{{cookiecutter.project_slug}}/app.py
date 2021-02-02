@@ -11,8 +11,8 @@ logging.basicConfig(stream=sys.stderr,
 
 
 @click.command(
-    short_help="short help",
-    help="help",
+    short_help="{{cookiecutter.project_title}}",
+    help="{{cookiecutter.project_description}}",
     context_settings=dict(
         ignore_unknown_options=True,
         allow_extra_args=True,
