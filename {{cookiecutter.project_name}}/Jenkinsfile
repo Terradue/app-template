@@ -17,7 +17,7 @@ pipeline {
                     def app = docker.build("${dockerTag}", "-f .docker/Dockerfile .")
                     def mType=getTypeOfVersion(env.BRANCH_NAME)
                     docker.withRegistry("https://${dockerRegistry}", 'docker-terradue') {
-                     app.push("${mType}${dockerNewVersion}")
+                      app.push("${mType}${dockerNewVersion}")
                       app.push("${mType}latest")
                     }
                 }
